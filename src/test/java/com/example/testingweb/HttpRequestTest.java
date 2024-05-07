@@ -24,4 +24,14 @@ public class HttpRequestTest {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
 				String.class)).contains("Hello, World");
 	}
+
+	/**
+	 * Added a second unit test to check that greeting controller is properly covered.
+	 * @throws Exception
+	 */
+	@Test
+	public void greetingShouldReturnDefaultMessage02() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greeting",
+				String.class)).contains("Hello, World");
+	}
 }
