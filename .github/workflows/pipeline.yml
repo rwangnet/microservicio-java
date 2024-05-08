@@ -4,7 +4,7 @@ name: CI/CD Pipeline
 env:
   OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
   OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
-  OPENSHIFT_NAMESPACE: ""
+  OPENSHIFT_NAMESPACE: "rwangnet-dev"
 
   APP_NAME: "microservicio-java"
   APP_PORT: "8080"
