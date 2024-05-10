@@ -82,4 +82,4 @@ jobs:
       
        - name: Deploy in the host Kubernetes cluster
          run: |
-           kubectl apply -f deploy.yaml
+           oc apply -f deploy.yaml --namespace dev-project
