@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    outputs:
-     ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
-     SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
-
     steps:
       # Checks current branch code
       - name: Checkout code
@@ -36,6 +32,7 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
+      # Runs the CI analysis for the required sonarqube project.
       - name: Sonarcloud Analysis
         run: |
           mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
@@ -43,6 +40,17 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=rwangnet \
           -Dsonar.projectKey=rwangnet_microservicio-java
+
+
+      # Adds Quality check action to get FAILED/SUCCESS checking from the previous step.
+      - name: SonarQube Quality Gate Check
+        env:
+           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+           SONAR_HOST_URL: https://sonarcloud.io
+        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+        with:
+          scanMetadataReportFile: target/sonar/report-task.txt
+
 
       # Set up buildx docker CLI in container.
       - name: Set up Docker
