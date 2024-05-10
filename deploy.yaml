@@ -29,4 +29,13 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: NodePort
+  type: ClusterIP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: microservicio-route
+spec:
+  to:
+    kind: Service
+    name: microservicio
