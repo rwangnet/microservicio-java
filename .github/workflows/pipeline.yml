@@ -64,10 +64,17 @@ jobs:
           username: rwangnet
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set Docker buildx for arm64
+        run: |
+          docker run --privileged --rm tonistiigi/binfmt --install arm64
+          docker buildx create --name mybuilder
+          docker buildx use mybuilder
+          docker buildx inspect --bootstrap
+
       # Build and pushes docker image to GHCR
       - name: 'Build and Push Docker Image to GHCR'
         run: |
-            docker build . --tag ghcr.io/rwangnet/microservicio:latest
+            docker buildx build --platform linux/arm64 . --tag ghcr.io/rwangnet/microservicio:latest
             docker push ghcr.io/rwangnet/microservicio:latest
 
  # Section intended to run in one of the "runners" container in local environment
