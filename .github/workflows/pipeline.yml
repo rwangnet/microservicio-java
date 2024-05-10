@@ -64,8 +64,22 @@ jobs:
           username: rwangnet
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and pushes docker image to GHCR (configured to my local host OS)
+      # Build and pushes docker image to GHCR
       - name: 'Build and Push Docker Image to GHCR'
         run: |
-            docker buildx build --platform linux/amd64 . --tag ghcr.io/rwangnet/microservicio:latest
+            docker build . --tag ghcr.io/rwangnet/microservicio:latest
             docker push ghcr.io/rwangnet/microservicio:latest
+
+ # Section intended to run in one of the "runners" container in local environment
+  deploy:
+     needs: build
+     runs-on: self-hosted
+
+     steps:
+
+       - name: Checkout code repository 
+         uses: actions/checkout@v4
+      
+       - name: Deploy in the host Kubernetes cluster
+         run: |
+           kubectl apply -f deploy.yaml

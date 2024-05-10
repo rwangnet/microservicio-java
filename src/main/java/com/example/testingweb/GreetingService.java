@@ -10,6 +10,6 @@ public class GreetingService {
 		// Setting an explicit password to generate a security hotspot in the feature branch
 		//String myDatabasePassword = "1234567890";
 
-		return "Hello, World";
+		return "Hola, soy Ricardo Wangnet";
 	}
 }
