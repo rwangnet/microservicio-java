@@ -11,7 +11,7 @@ jobs:
 
     steps:
       # Checks current branch code
-      - name: Checkout code repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       # Sets in the current GH container the java version for building the application
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4.2.1
         with:
           distribution: "temurin"
-          java-version: "17"
+          java-version: "8"
 
       # Runs the current Maven build command to generate Java artifacts
       - name: Build with Maven
