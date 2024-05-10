@@ -64,8 +64,8 @@ jobs:
           username: rwangnet
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and pushes docker image to GHCR
+      # Build and pushes docker image to GHCR (configured to my local host OS)
       - name: 'Build and Push Docker Image to GHCR'
         run: |
-            docker build . --tag ghcr.io/rwangnet/microservicio:latest
+            docker buildx build --platform linux/amd64 . --tag ghcr.io/rwangnet/microservicio:latest
             docker push ghcr.io/rwangnet/microservicio:latest
