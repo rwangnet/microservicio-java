@@ -11,7 +11,7 @@ jobs:
 
     steps:
       # Checks current branch code
-      - name: Checkout code
+      - name: Checkout code repository
         uses: actions/checkout@v4
 
       # Sets in the current GH container the java version for building the application
