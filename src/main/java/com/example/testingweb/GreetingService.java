@@ -8,7 +8,7 @@ public class GreetingService {
 		System.out.println("Generando una mala práctica aqui!!!!!!!!!!!!");
 
 		// Setting an explicit password to generate a security hotspot in the feature branch
-		//String myDatabasePassword = "1234567890";
+		String myDatabasePassword = "1234567890";
 
 		return "Hola, soy Ricardo Wangnet";
 	}
