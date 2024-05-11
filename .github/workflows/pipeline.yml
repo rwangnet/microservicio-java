@@ -83,3 +83,15 @@ jobs:
        - name: Deploy in the host Kubernetes cluster
          run: |
            oc apply -f deploy.yaml --namespace dev-project
+
+       - name: Wait for 2 minutes
+         run: sleep 120
+
+       - name: Run JMeter Test
+         run: jmeter -n -t /Users/rwangnet/Desktop/Github-runner/test.jmx -l test-results.csv -e -o test-html-report
+
+       - name: Upload Test Results
+         uses: actions/upload-artifact@v2
+         with:
+           name: jmeter-results
+           path: test-results.csv
